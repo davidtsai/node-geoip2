@@ -13,6 +13,11 @@ exports.init = function(path) {
     return _defaultDB;
 }
 
+exports.cleanup = function() {
+
+    _defaultDB = null;
+}
+
 exports.lookup = function(address, callback) {
 
     if (!_defaultDB) {
