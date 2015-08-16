@@ -5,7 +5,7 @@ Fast native implementation by wrapping libmaxminddb to read MaxMind's GeoIP2 mmd
 
 For ease of use, this module includes the GeoLite2 database created by MaxMind, available from http://www.maxmind.com.  To get more accurate results, this module can also be used with the GeoIP2 database sold by MaxMind.
 
-## Installtion
+## Installation
 `npm install --save node-geoip2`
 
 ## Usage
