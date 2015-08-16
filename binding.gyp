@@ -7,10 +7,10 @@
       ],
       "include_dirs": [
         "<!(node -e \"require('nan')\")",
-        "./src",
-        "./deps/libmaxminddb",
-        "./deps/libmaxminddb/src",
-        "./deps/libmaxminddb/include"
+        "deps/config/<(OS)/<(target_arch)",
+        "deps/libmaxminddb",
+        "deps/libmaxminddb/src",
+        "deps/libmaxminddb/include"
       ],
       "cflags": [
         "-std=c++11",

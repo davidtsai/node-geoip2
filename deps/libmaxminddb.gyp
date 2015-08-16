@@ -7,9 +7,8 @@
         'HAVE_CONFIG_H'
       ],
       'include_dirs': [
-        './config/<(OS)/<(target_arch)',
-        './libmaxminddb/include',
-        './libmaxminddb'
+        'config/<(OS)/<(target_arch)',
+        'libmaxminddb/include'
       ],
       'sources': [
         './libmaxminddb/src/maxminddb.c'
