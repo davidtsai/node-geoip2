@@ -38,41 +38,47 @@ static Handle<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list)
             return array;
         }
         case MMDB_DATA_TYPE_UTF8_STRING: {
-
             std::string str((char *)(*entry_data_list)->entry_data.utf8_string,
                 (*entry_data_list)->entry_data.data_size);
 
             *entry_data_list = (*entry_data_list)->next;
             return NanNew(str);
         }
-
-        case MMDB_DATA_TYPE_DOUBLE:
+        case MMDB_DATA_TYPE_DOUBLE: {
+            Handle<Value> val = NanNew<Number>((*entry_data_list)->entry_data.double_value);
             *entry_data_list = (*entry_data_list)->next;
-            return NanNew((*entry_data_list)->entry_data.double_value);
-        
-        case MMDB_DATA_TYPE_FLOAT:
+            return val;
+        }
+        case MMDB_DATA_TYPE_FLOAT: {
+            Handle<Value> val = NanNew<Number>((*entry_data_list)->entry_data.float_value);
             *entry_data_list = (*entry_data_list)->next;
-            return NanNew((*entry_data_list)->entry_data.float_value);
-
-        case MMDB_DATA_TYPE_UINT16:
+            return val;
+        }
+        case MMDB_DATA_TYPE_UINT16: {
+            Handle<Value> val = NanNew((*entry_data_list)->entry_data.uint16);
             *entry_data_list = (*entry_data_list)->next;
-            return NanNew((*entry_data_list)->entry_data.uint16);
-        
-        case MMDB_DATA_TYPE_UINT32:
+            return val;
+        }
+        case MMDB_DATA_TYPE_UINT32: {
+            Handle<Value> val = NanNew((*entry_data_list)->entry_data.uint32);
             *entry_data_list = (*entry_data_list)->next;
-            return NanNew((*entry_data_list)->entry_data.uint32);
-
-        case MMDB_DATA_TYPE_BOOLEAN:
+            return val;
+        }
+        case MMDB_DATA_TYPE_BOOLEAN: {
+            Handle<Value> val = NanNew<Boolean>((*entry_data_list)->entry_data.boolean);
             *entry_data_list = (*entry_data_list)->next;
-            return NanNew<Boolean>((*entry_data_list)->entry_data.boolean);
-
-        case MMDB_DATA_TYPE_UINT64:
+            return val;
+        }
+        case MMDB_DATA_TYPE_UINT64: {
+            Handle<Value> val = NanNew((double)(*entry_data_list)->entry_data.uint64);
             *entry_data_list = (*entry_data_list)->next;
-            return NanNew((double)(*entry_data_list)->entry_data.uint64);
-       
-        case MMDB_DATA_TYPE_INT32:
+            return val;
+        }
+        case MMDB_DATA_TYPE_INT32: {
+            Handle<Value> val = NanNew((*entry_data_list)->entry_data.int32);
             *entry_data_list = (*entry_data_list)->next;
-            return NanNew((*entry_data_list)->entry_data.int32);
+            return val;
+        }
 
         case MMDB_DATA_TYPE_UINT128:
         case MMDB_DATA_TYPE_BYTES:
@@ -172,7 +178,10 @@ NAN_METHOD(NodeMMDB::LookupSync) {
             NanReturnUndefined();
         }
         else {
-            auto ret = convertToV8(resultList);
+            
+            //MMDB_dump_entry_data_list(stdout, resultList, 2);
+
+            Handle<Value> ret = convertToV8(resultList);
             MMDB_free_entry_data_list(resultList);
             NanReturnValue(ret);
         }

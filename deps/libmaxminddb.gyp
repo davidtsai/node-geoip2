@@ -32,6 +32,10 @@
               '-std=c99',
               '-O3'
             ],
+            'OTHER_CPLUSPLUSFLAGS': [
+              '-std=c99',
+              '-O3'
+            ]
           }
         }],
         ['OS=="solaris"', {
