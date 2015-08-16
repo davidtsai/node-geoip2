@@ -49,7 +49,6 @@ geoip2.init('/path/to/GeoIp2-City.mmdb');
 ```
 
 ## API
-
 **geoip2.init(filePath)**  
 Initializes the default database to the specified file.
 
