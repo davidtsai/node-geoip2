@@ -1,7 +1,7 @@
 {
   "targets": [
     {
-      "target_name": "node-mmdb",
+      "target_name": "node_mmdb",
       "sources": [
         "<!@(ls -1 ./src/*.cpp)",
       ],
@@ -18,8 +18,8 @@
         "-Wno-reorder",
         "-O3"
       ],
-      "libraries": [
-        '-l./deps/libmaxminddb/src/libmaxminddb.la',
+      "dependencies": [
+        "deps/libmaxminddb.gyp:libmaxminddb"
       ],
       "ldflags": [
         "-stdlib=libc++",
@@ -48,10 +48,10 @@
     {
         "target_name": "action_after_build",
         "type": "none",
-        "dependencies": [ "node-mmdb" ],
+        "dependencies": [ "node_mmdb" ],
         "copies": [
             {
-                "files": [ "<(PRODUCT_DIR)/node-mmdb.node" ],
+                "files": [ "<(PRODUCT_DIR)/node_mmdb.node" ],
                 "destination": "./lib"
             }
         ]
