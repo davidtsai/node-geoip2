@@ -9,21 +9,17 @@
         "<!(node -e \"require('nan')\")",
         "./src",
         "./deps/libmaxminddb",
+        "./deps/libmaxminddb/src",
         "./deps/libmaxminddb/include"
       ],
       "cflags": [
         "-std=c++11",
-        "-stdlib=libc++",
         "-Wno-unused-function",
         "-Wno-reorder",
         "-O3"
       ],
       "dependencies": [
         "deps/libmaxminddb.gyp:libmaxminddb"
-      ],
-      "ldflags": [
-        "-stdlib=libc++",
-        "-Wl, -export-dynamic"
       ],
       "cflags!":    [ '-fno-exceptions', '-fno-rtti' ],
       "cflags_cc!": [ '-fno-exceptions', '-fno-rtti' ],

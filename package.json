@@ -9,6 +9,6 @@
     "url": "git://github.com/zhurosoft/node-mmdb.git"
   },
   "dependencies": {
-    "nan": "1.7.0"
+    "nan": "1.8.4"
   }
 }

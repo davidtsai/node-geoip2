@@ -4,7 +4,7 @@
       'target_name': 'configure_libmaxminddb',
       'type': 'none',
       'hard_dependency': 1,
-      'conf': '<!(cd libmaxminddb; ./bootstrap; ./configure)'
+      'conf': '<!(cd libmaxminddb; ./configure)'
     },
     {
       'target_name': 'libmaxminddb',
