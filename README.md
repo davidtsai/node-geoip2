@@ -8,6 +8,8 @@ For ease of use, this module includes the GeoLite2 database created by MaxMind, 
 ## Installation
 `npm install --save node-geoip2`
 
+Will compile libmaxminddb and node bindings on install.  Tested to work on Linux and OS X.
+
 ## Usage
 Lookup an ip address:
 ```
