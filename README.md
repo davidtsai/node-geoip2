@@ -50,26 +50,26 @@ geoip2.init('/path/to/GeoIp2-City.mmdb');
 
 ## API
 
-`geoip2.init(filePath)`
+`geoip2.init(filePath)`  
 Initializes the default database to the specified file.
 
-`geoip2.cleanup()`
+`geoip2.cleanup()`  
 Cleans up the default database.  Shouldn't be called unless you are done looking up addresses.
 
-`geoip2.lookup(address, callback)`
+`geoip2.lookup(address, callback)`  
 Looks up the full data record for an address *asynchronously*.
 For documentation on the result object returned see: http://dev.maxmind.com/geoip/geoip2/web-services/.
 
-`geoip2.lookupSync(address)`
+`geoip2.lookupSync(address)`  
 Looks up the full data record for an address *synchronously*.
 
-`geoip2.lookupSimple(address, callback)`
+`geoip2.lookupSimple(address, callback)`  
 Looks up the simple data record for an address *asynchronously*.
 
-`geoip2.lookupSimpleSync(address)`
+`geoip2.lookupSimpleSync(address)`  
 Looks up the simple data record for an address *synchronously*.
 
-`geoip2.MMDB`
+`geoip2.MMDB`  
 Underlying class to create different instances of the DB.  Only needed for advanced usage.
 
 *libmaxminddb* might be fast enough that the asynchronous API's are unneccessary.  Would be interested to know if anyone has stats for this at very high volume.
