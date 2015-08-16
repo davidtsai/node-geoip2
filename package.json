@@ -1,13 +1,13 @@
 {
-  "name": "node-mmdb",
+  "name": "node-geoip2",
   "version": "0.9.0",
-  "description": "Maxmind DB reader. Natively implemented by wrapping libmaxminddb.",
-  "main": "./node-mmdb.js",
+  "description": "Maxmind GeoIP2 database reader.  Fast native implementation by wrapping libmaxminddb.",
+  "main": "./node-geoip2.js",
   "author": "David Tsai",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/zhurosoft/node-mmdb.git"
+    "url": "git://github.com/zhurosoft/node-geoip2.git"
   },
   "dependencies": {
     "nan": "1.8.4"
