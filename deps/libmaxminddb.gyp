@@ -1,21 +1,15 @@
 {
   'targets': [
     {
-      'target_name': 'configure_libmaxminddb',
-      'type': 'none',
-      'hard_dependency': 1,
-      'conf': '<!(cd libmaxminddb; ./configure)'
-    },
-    {
       'target_name': 'libmaxminddb',
       'type': 'static_library',
-      'dependencies': [ 'configure_libmaxminddb' ],
       'defines': [
         'HAVE_CONFIG_H'
       ],
       'include_dirs': [
-        './libmaxminddb',
-        './libmaxminddb/include'
+        './config/<(OS)/<(target_arch)',
+        './libmaxminddb/include',
+        './libmaxminddb'
       ],
       'sources': [
         './libmaxminddb/src/maxminddb.c'
