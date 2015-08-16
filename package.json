@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/zhurosoft/node-geoip2.git"
+    "url": "git://github.com/davidtsai/node-geoip2.git"
   },
   "dependencies": {
     "nan": "1.8.4"
