@@ -175,12 +175,10 @@ NAN_METHOD(NodeMMDB::LookupSync) {
             std::ostringstream os;
             os << "Error looking up address data: " << MMDB_strerror(status);
             NanThrowError(os.str().c_str());
+            MMDB_free_entry_data_list(resultList);
             NanReturnUndefined();
         }
         else {
-            
-            //MMDB_dump_entry_data_list(stdout, resultList, 2);
-
             Handle<Value> ret = convertToV8(resultList);
             MMDB_free_entry_data_list(resultList);
             NanReturnValue(ret);
