@@ -6,6 +6,10 @@
 
 static Handle<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list) {
 
+    if (! *entry_data_list) {
+        return NanNull();
+    }
+
     switch ((*entry_data_list)->entry_data.type) {
 
         case MMDB_DATA_TYPE_MAP: {
