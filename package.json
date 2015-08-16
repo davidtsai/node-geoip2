@@ -1,0 +1,14 @@
+{
+  "name": "node-mmdb",
+  "version": "0.9.0",
+  "description": "Maxmind db reader.",
+  "main": "./index.js",
+  "author": "David Tsai",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zhurosoft/node-mmdb.git"
+  },
+  "dependencies": {
+    "nan": "1.7.0"
+  }
+}
