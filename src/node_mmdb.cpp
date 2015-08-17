@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <sstream>
 
-static Handle<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list) {
+static Local<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list) {
 
     if (! *entry_data_list) {
         return NanNull();
@@ -93,7 +93,7 @@ static Handle<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list)
     }
 }
 
-static Handle<Value> convertToV8(MMDB_entry_data_list_s *entry_data_list) {
+static Local<Value> convertToV8(MMDB_entry_data_list_s *entry_data_list) {
     
     return convertToV8Helper(&entry_data_list);
 }
@@ -183,7 +183,7 @@ NAN_METHOD(NodeMMDB::LookupSync) {
             NanReturnUndefined();
         }
         else {
-            Handle<Value> ret = convertToV8(resultList);
+            Local<Value> ret = convertToV8(resultList);
             MMDB_free_entry_data_list(resultList);
             NanReturnValue(ret);
         }
