@@ -7,14 +7,14 @@
 static Handle<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list) {
 
     if (! *entry_data_list) {
-        return NanNull();
+        return Nan::Null();
     }
 
     switch ((*entry_data_list)->entry_data.type) {
 
         case MMDB_DATA_TYPE_MAP: {
 
-            Handle<Object> object = NanNew<Object>();
+            Handle<Object> object = Nan::New<Object>();
 
             uint32_t size = (*entry_data_list)->entry_data.data_size;
 
@@ -24,7 +24,7 @@ static Handle<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list)
                     (*entry_data_list)->entry_data.data_size);
 
                 *entry_data_list = (*entry_data_list)->next;
-                object->Set(NanNew(key), convertToV8Helper(entry_data_list));
+                object->Set(Nan::New(key).ToLocalChecked(), convertToV8Helper(entry_data_list));
             }
             return object;
         }
@@ -32,7 +32,7 @@ static Handle<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list)
 
             uint32_t size = (*entry_data_list)->entry_data.data_size;
 
-            Handle<Array> array = NanNew<Array>(size);
+            Handle<Array> array = Nan::New<Array>(size);
 
             int i = 0;
             for (*entry_data_list = (*entry_data_list)->next; size && *entry_data_list; size--) {
@@ -46,40 +46,40 @@ static Handle<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list)
                 (*entry_data_list)->entry_data.data_size);
 
             *entry_data_list = (*entry_data_list)->next;
-            return NanNew(str);
+            return Nan::New(str).ToLocalChecked();
         }
         case MMDB_DATA_TYPE_DOUBLE: {
-            Handle<Value> val = NanNew<Number>((*entry_data_list)->entry_data.double_value);
+            Handle<Value> val = Nan::New<Number>((*entry_data_list)->entry_data.double_value);
             *entry_data_list = (*entry_data_list)->next;
             return val;
         }
         case MMDB_DATA_TYPE_FLOAT: {
-            Handle<Value> val = NanNew<Number>((*entry_data_list)->entry_data.float_value);
+            Handle<Value> val = Nan::New<Number>((*entry_data_list)->entry_data.float_value);
             *entry_data_list = (*entry_data_list)->next;
             return val;
         }
         case MMDB_DATA_TYPE_UINT16: {
-            Handle<Value> val = NanNew((*entry_data_list)->entry_data.uint16);
+            Handle<Value> val = Nan::New((*entry_data_list)->entry_data.uint16);
             *entry_data_list = (*entry_data_list)->next;
             return val;
         }
         case MMDB_DATA_TYPE_UINT32: {
-            Handle<Value> val = NanNew((*entry_data_list)->entry_data.uint32);
+            Handle<Value> val = Nan::New((*entry_data_list)->entry_data.uint32);
             *entry_data_list = (*entry_data_list)->next;
             return val;
         }
         case MMDB_DATA_TYPE_BOOLEAN: {
-            Handle<Value> val = NanNew<Boolean>((*entry_data_list)->entry_data.boolean);
+            Handle<Value> val = Nan::New<Boolean>((*entry_data_list)->entry_data.boolean);
             *entry_data_list = (*entry_data_list)->next;
             return val;
         }
         case MMDB_DATA_TYPE_UINT64: {
-            Handle<Value> val = NanNew((double)(*entry_data_list)->entry_data.uint64);
+            Handle<Value> val = Nan::New((double)(*entry_data_list)->entry_data.uint64);
             *entry_data_list = (*entry_data_list)->next;
             return val;
         }
         case MMDB_DATA_TYPE_INT32: {
-            Handle<Value> val = NanNew((*entry_data_list)->entry_data.int32);
+            Handle<Value> val = Nan::New((*entry_data_list)->entry_data.int32);
             *entry_data_list = (*entry_data_list)->next;
             return val;
         }
@@ -89,7 +89,7 @@ static Handle<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list)
             // Not implemented
             *entry_data_list = (*entry_data_list)->next;
         default:
-            return NanNull();
+            return Nan::Null();
     }
 }
 
@@ -116,39 +116,38 @@ NodeMMDB::~NodeMMDB() {
 
 NAN_METHOD(NodeMMDB::New) {
 
-    NanScope();
+    Nan::HandleScope scope; 
 
     NodeMMDB *wrapper;
-    if( args.Length() == 1 && args[0]->IsString()) {
+    if( info.Length() == 1 && info[0]->IsString()) {
         try {
-            std::string filePath = *NanUtf8String(args[0]);
+            std::string filePath = *Nan::Utf8String(info[0]);
             wrapper = new NodeMMDB(filePath);
         }
         catch(const std::exception &e) {
-            NanThrowError(e.what());
-            NanReturnUndefined();
+            Nan::ThrowError(e.what());
+	    info.GetReturnValue().Set(Nan::Undefined());
         }
     }
     else {
-        NanThrowTypeError("Invalid arguments, expecting a string argument.");
-        NanReturnUndefined();
+        Nan::ThrowTypeError("Invalid arguments, expecting a string argument.");
+        info.GetReturnValue().Set(Nan::Undefined());
     }
 
-    wrapper->Wrap(args.Holder());
-    NanReturnValue(args.Holder());
+    wrapper->Wrap(info.Holder());
+    info.GetReturnValue().Set(info.Holder());
 }
 
 NAN_METHOD(NodeMMDB::LookupSync) {
 
-    NanScope();
+    Nan::EscapableHandleScope scope;
 
-    if (args.Length() != 1 || ! args[0]->IsString()) {
-        NanThrowTypeError("Invalid arguments, expecting a string argument.");
-        NanReturnUndefined();
+    if (info.Length() != 1 || ! info[0]->IsString()) {
+        Nan::ThrowTypeError("Invalid arguments, expecting a string argument.");
     }
 
-    NodeMMDB *wrapper = Unwrap<NodeMMDB>(args.Holder());
-    std::string lookupStr = *NanUtf8String(args[0]);
+    NodeMMDB *wrapper = Unwrap<NodeMMDB>(info.Holder());
+    std::string lookupStr = *Nan::Utf8String(info[0]);
 
     int gai_error, mmdb_error;
 
@@ -158,14 +157,12 @@ NAN_METHOD(NodeMMDB::LookupSync) {
     if (gai_error != 0) {
         std::ostringstream os;
         os << "Error parsing address " << lookupStr << ": " << gai_strerror(gai_error);
-        NanThrowError(os.str().c_str());
-        NanReturnUndefined();
+        Nan::ThrowError(os.str().c_str());
     }
     else if (mmdb_error != MMDB_SUCCESS) {
         std::ostringstream os;
         os << "Error looking up address " << lookupStr << ": " << MMDB_strerror(mmdb_error);
-        NanThrowError(os.str().c_str());
-        NanReturnUndefined();
+        Nan::ThrowError(os.str().c_str());
     }
 
     if (result.found_entry) {
@@ -178,44 +175,40 @@ NAN_METHOD(NodeMMDB::LookupSync) {
         if (status != MMDB_SUCCESS) {
             std::ostringstream os;
             os << "Error looking up address data: " << MMDB_strerror(status);
-            NanThrowError(os.str().c_str());
             MMDB_free_entry_data_list(resultList);
-            NanReturnUndefined();
+            Nan::ThrowError(os.str().c_str());
         }
         else {
             Handle<Value> ret = convertToV8(resultList);
             MMDB_free_entry_data_list(resultList);
-            NanReturnValue(ret);
+	    info.GetReturnValue().Set(scope.Escape(ret));
         }
     }
     else {
-        NanReturnValue(NanNull());
+	info.GetReturnValue().Set(Nan::Null());
     }
 }
 
 NAN_METHOD(NodeMMDB::Lookup) {
 
-    NanScope();
+    Nan::HandleScope scope;
 
-    if (args.Length() != 2 || ! args[0]->IsString() || ! args[1]->IsFunction()) {
-        NanThrowTypeError("Invalid arguments, expecting an string argument and a function callback argument.");
-        NanReturnUndefined();
+    if (info.Length() != 2 || ! info[0]->IsString() || ! info[1]->IsFunction()) {
+        Nan::ThrowTypeError("Invalid arguments, expecting an string argument and a function callback argument.");
     }
 
-    NodeMMDB *wrapper = Unwrap<NodeMMDB>(args.Holder());
+    NodeMMDB *wrapper = Unwrap<NodeMMDB>(info.Holder());
 
-    std::string lookupStr = *NanUtf8String(args[0]);
-    NanCallback *callback = new NanCallback(args[1].As<Function>());
+    std::string lookupStr = *Nan::Utf8String(info[0]);
+    Nan::Callback *callback = new Nan::Callback(info[1].As<Function>());
 
     NodeMMDBWorker *worker = new NodeMMDBWorker(callback, wrapper, lookupStr);
-    worker->SaveToPersistent("mmdb", args.Holder());
-    NanAsyncQueueWorker(worker);
-
-    NanReturnUndefined();
+    worker->SaveToPersistent("mmdb", info.Holder());
+    Nan::AsyncQueueWorker(worker);
 }
 
-NodeMMDBWorker::NodeMMDBWorker(NanCallback *callback, NodeMMDB *mmdb, const std::string &lookupStr) :
-    NanAsyncWorker(callback),
+NodeMMDBWorker::NodeMMDBWorker(Nan::Callback *callback, NodeMMDB *mmdb, const std::string &lookupStr) :
+    Nan::AsyncWorker(callback),
     mmdb(mmdb),
     lookupStr(lookupStr),
     resultList(NULL)
@@ -256,11 +249,11 @@ void NodeMMDBWorker::Execute() {
 
 void NodeMMDBWorker::HandleOKCallback() {
 
-    NanScope();
+    Nan::EscapableHandleScope scope;
 
     Local<Value> argv[] = {
-        NanNull(),
-        NanNew(convertToV8(resultList))
+        Nan::Null(),
+        scope.Escape(convertToV8(resultList))
     };
 
     callback->Call(2, argv);
@@ -269,20 +262,20 @@ void NodeMMDBWorker::HandleOKCallback() {
 void NodeMMDBWorker::Destroy() {
 
     MMDB_free_entry_data_list(resultList);
-    NanAsyncWorker::Destroy();
+    Nan::AsyncWorker::Destroy();
 }
 
 static void init(Handle<Object> exports) {
 
      /** MMDB **/
-    Handle<FunctionTemplate> mmdbTpl =  NanNew<FunctionTemplate>(NodeMMDB::New);
-    mmdbTpl->SetClassName(NanNew<String>("MMDB"));
+    Handle<FunctionTemplate> mmdbTpl =  Nan::New<FunctionTemplate>(NodeMMDB::New);
+    mmdbTpl->SetClassName(Nan::New("MMDB").ToLocalChecked());
     mmdbTpl->InstanceTemplate()->SetInternalFieldCount(1);
 
-    NODE_SET_PROTOTYPE_METHOD(mmdbTpl, "lookup",     NodeMMDB::Lookup);
-    NODE_SET_PROTOTYPE_METHOD(mmdbTpl, "lookupSync", NodeMMDB::LookupSync);
+    Nan::SetPrototypeMethod(mmdbTpl, "lookup",     NodeMMDB::Lookup);
+    Nan::SetPrototypeMethod(mmdbTpl, "lookupSync", NodeMMDB::LookupSync);
 
-    exports->Set(NanNew<String>("MMDB"), mmdbTpl->GetFunction());
+    exports->Set(Nan::New("MMDB").ToLocalChecked(), mmdbTpl->GetFunction());
 }
 
 NODE_MODULE(node_mmdb, init)

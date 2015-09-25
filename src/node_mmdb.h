@@ -7,7 +7,7 @@
 
 using namespace v8;
 
-class NodeMMDB : public node::ObjectWrap {
+class NodeMMDB : public Nan::ObjectWrap {
 
 public:
 
@@ -25,10 +25,10 @@ protected:
     friend class NodeMMDBWorker;
 };
 
-class NodeMMDBWorker : public NanAsyncWorker {
+class NodeMMDBWorker : public Nan::AsyncWorker {
 
 public:
-    NodeMMDBWorker(NanCallback *callback, NodeMMDB *mmdb, const std::string &lookupStr);
+    NodeMMDBWorker(Nan::Callback *callback, NodeMMDB *mmdb, const std::string &lookupStr);
 
     void Execute() override;
     void HandleOKCallback() override;
