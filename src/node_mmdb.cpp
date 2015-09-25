@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <sstream>
 
-static Handle<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list) {
+static Local<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list) {
 
     if (! *entry_data_list) {
         return Nan::Null();
@@ -14,7 +14,7 @@ static Handle<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list)
 
         case MMDB_DATA_TYPE_MAP: {
 
-            Handle<Object> object = Nan::New<Object>();
+            Local<Object> object = Nan::New<Object>();
 
             uint32_t size = (*entry_data_list)->entry_data.data_size;
 
@@ -32,7 +32,7 @@ static Handle<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list)
 
             uint32_t size = (*entry_data_list)->entry_data.data_size;
 
-            Handle<Array> array = Nan::New<Array>(size);
+            Local<Array> array = Nan::New<Array>(size);
 
             int i = 0;
             for (*entry_data_list = (*entry_data_list)->next; size && *entry_data_list; size--) {
@@ -49,37 +49,37 @@ static Handle<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list)
             return Nan::New(str).ToLocalChecked();
         }
         case MMDB_DATA_TYPE_DOUBLE: {
-            Handle<Value> val = Nan::New<Number>((*entry_data_list)->entry_data.double_value);
+            Local<Value> val = Nan::New<Number>((*entry_data_list)->entry_data.double_value);
             *entry_data_list = (*entry_data_list)->next;
             return val;
         }
         case MMDB_DATA_TYPE_FLOAT: {
-            Handle<Value> val = Nan::New<Number>((*entry_data_list)->entry_data.float_value);
+            Local<Value> val = Nan::New<Number>((*entry_data_list)->entry_data.float_value);
             *entry_data_list = (*entry_data_list)->next;
             return val;
         }
         case MMDB_DATA_TYPE_UINT16: {
-            Handle<Value> val = Nan::New((*entry_data_list)->entry_data.uint16);
+            Local<Value> val = Nan::New((*entry_data_list)->entry_data.uint16);
             *entry_data_list = (*entry_data_list)->next;
             return val;
         }
         case MMDB_DATA_TYPE_UINT32: {
-            Handle<Value> val = Nan::New((*entry_data_list)->entry_data.uint32);
+            Local<Value> val = Nan::New((*entry_data_list)->entry_data.uint32);
             *entry_data_list = (*entry_data_list)->next;
             return val;
         }
         case MMDB_DATA_TYPE_BOOLEAN: {
-            Handle<Value> val = Nan::New<Boolean>((*entry_data_list)->entry_data.boolean);
+            Local<Value> val = Nan::New<Boolean>((*entry_data_list)->entry_data.boolean);
             *entry_data_list = (*entry_data_list)->next;
             return val;
         }
         case MMDB_DATA_TYPE_UINT64: {
-            Handle<Value> val = Nan::New((double)(*entry_data_list)->entry_data.uint64);
+            Local<Value> val = Nan::New((double)(*entry_data_list)->entry_data.uint64);
             *entry_data_list = (*entry_data_list)->next;
             return val;
         }
         case MMDB_DATA_TYPE_INT32: {
-            Handle<Value> val = Nan::New((*entry_data_list)->entry_data.int32);
+            Local<Value> val = Nan::New((*entry_data_list)->entry_data.int32);
             *entry_data_list = (*entry_data_list)->next;
             return val;
         }
@@ -93,7 +93,7 @@ static Handle<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list)
     }
 }
 
-static Handle<Value> convertToV8(MMDB_entry_data_list_s *entry_data_list) {
+static Local<Value> convertToV8(MMDB_entry_data_list_s *entry_data_list) {
     
     return convertToV8Helper(&entry_data_list);
 }
@@ -118,7 +118,7 @@ NAN_METHOD(NodeMMDB::New) {
 
     Nan::HandleScope scope; 
 
-    NodeMMDB *wrapper;
+    NodeMMDB *wrapper = nullptr;
     if( info.Length() == 1 && info[0]->IsString()) {
         try {
             std::string filePath = *Nan::Utf8String(info[0]);
@@ -179,9 +179,9 @@ NAN_METHOD(NodeMMDB::LookupSync) {
             Nan::ThrowError(os.str().c_str());
         }
         else {
-            Handle<Value> ret = convertToV8(resultList);
+            Local<Value> ret = convertToV8(resultList);
             MMDB_free_entry_data_list(resultList);
-	    info.GetReturnValue().Set(scope.Escape(ret));
+	        info.GetReturnValue().Set(scope.Escape(ret));
         }
     }
     else {
