@@ -41,10 +41,10 @@ exports.lookupSync = function(address) {
 function parseResult(result) {
 
     return {
-        country:     result.country.iso_code,
-        continent:   result.continent.code,
+        country:     result.country ? result.country.iso_code : undefined,
+        continent:   result.continent ? result.continent.code : undefined,
         postal:      result.postal ? result.postal.code : undefined,
-        city:        result.city ? result.city.names.en : undefined,
+        city:        result.city && result.city.names ? result.city.names.en : undefined,
         location:    result.location,
         subdivision: result.subdivisions ? result.subdivisions[0].iso_code : undefined
     };
