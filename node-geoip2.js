@@ -1,6 +1,7 @@
 
 var mmdb = require('./lib/node_mmdb.node');
 var path = require('path');
+var exists = require('exists-sync');
 
 var _defaultPath = path.resolve(__dirname, './databases/GeoLite2-City.mmdb');
 var _defaultDB   = null;
@@ -8,6 +9,11 @@ var _defaultDB   = null;
 exports.MMDB = mmdb.MMDB;
 
 exports.init = function(path) {
+
+    if (path && !exists(path)) {
+        console.log("WARNING: custom path " + path + " doesn't exist, initializing default now.");
+        path = undefined;
+    }
 
     _defaultDB = new mmdb.MMDB(path || _defaultPath);
     return _defaultDB;
@@ -21,7 +27,7 @@ exports.cleanup = function() {
 exports.lookup = function(address, callback) {
 
     if (!_defaultDB) {
-        console.log("WARNING: ipgeo2 database not initialzed, initializing default now.");
+        console.log("WARNING: ipgeo2 database not initialized, initializing default now.");
         exports.init();
     }
 
@@ -31,7 +37,7 @@ exports.lookup = function(address, callback) {
 exports.lookupSync = function(address) {
 
     if (!_defaultDB) {
-        console.log("WARNING: ipgeo2 database not initialzed, initializing default now.");
+        console.log("WARNING: ipgeo2 database not initialized, initializing default now.");
         exports.init();
     }
 
@@ -66,7 +72,7 @@ exports.lookupSimple = function(address, callback) {
 exports.lookupSimpleSync = function(address) {
 
     var result = exports.lookupSync(address);
-    
+
     if (result) {
         return parseResult(result);
     }
