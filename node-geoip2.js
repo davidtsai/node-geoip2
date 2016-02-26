@@ -1,7 +1,6 @@
 
 var mmdb = require('./lib/node_mmdb.node');
 var path = require('path');
-var exists = require('exists-sync');
 
 var _defaultPath = path.resolve(__dirname, './databases/GeoLite2-City.mmdb');
 var _defaultDB   = null;
@@ -9,11 +8,6 @@ var _defaultDB   = null;
 exports.MMDB = mmdb.MMDB;
 
 exports.init = function(path) {
-
-    if (path && !exists(path)) {
-        console.log("WARNING: custom path " + path + " doesn't exist, initializing default now.");
-        path = undefined;
-    }
 
     _defaultDB = new mmdb.MMDB(path || _defaultPath);
     return _defaultDB;
