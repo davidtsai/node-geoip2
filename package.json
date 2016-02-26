@@ -5,7 +5,16 @@
   "main": "./node-geoip2.js",
   "author": "David Tsai",
   "license": "MIT",
-  "keywords": ["maxmind", "mmdb", "maxminddb", "geoip", "geoip2", "geo", "geolocation", "ip"],
+  "keywords": [
+    "maxmind",
+    "mmdb",
+    "maxminddb",
+    "geoip",
+    "geoip2",
+    "geo",
+    "geolocation",
+    "ip"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/davidtsai/node-geoip2.git"

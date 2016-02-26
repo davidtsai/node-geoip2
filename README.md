@@ -8,7 +8,7 @@ For ease of use, this module includes the GeoLite2 database created by MaxMind, 
 ## Installation
 `npm install --save node-geoip2`
 
-Will compile libmaxminddb and node bindings on install.  Currently only Linux (x64) and OS X (x64) is supported.  To add support for more platforms, the config header files need to be generated on the platform from libmaxminddb.
+Will compile libmaxminddb and node bindings on install.  Currently only tested on Linux (x64) and OS X (x64) running Nodejs 0.12.x or Nodejs 4.x.  To add support for more platforms, the config header files need to be generated on the platform from libmaxminddb.
 
 ## Usage
 Lookup an ip address:
