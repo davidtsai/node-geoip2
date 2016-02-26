@@ -126,12 +126,14 @@ NAN_METHOD(NodeMMDB::New) {
         }
         catch(const std::exception &e) {
             Nan::ThrowError(e.what());
-	    info.GetReturnValue().Set(Nan::Undefined());
+		    info.GetReturnValue().Set(Nan::Undefined());
+            return;
         }
     }
     else {
         Nan::ThrowTypeError("Invalid arguments, expecting a string argument.");
         info.GetReturnValue().Set(Nan::Undefined());
+        return;
     }
 
     wrapper->Wrap(info.Holder());
@@ -194,7 +196,7 @@ NAN_METHOD(NodeMMDB::Lookup) {
     Nan::HandleScope scope;
 
     if (info.Length() != 2 || ! info[0]->IsString() || ! info[1]->IsFunction()) {
-        Nan::ThrowTypeError("Invalid arguments, expecting an string argument and a function callback argument.");
+        Nan::ThrowTypeError("Invalid arguments, expecting a string argument and a function callback argument.");
     }
 
     NodeMMDB *wrapper = Unwrap<NodeMMDB>(info.Holder());
