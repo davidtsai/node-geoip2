@@ -38,7 +38,18 @@
                 'MACOSX_DEPLOYMENT_TARGET': '10.7',
                 'GCC_ENABLE_CPP_EXCEPTIONS': 'YES'
             }
+        }],
+          [ 'OS=="win"', {
+            "defines": [
+              '_SSIZE_T_DEFINED'
+            ],
+            "link_settings": {
+                "libraries": [
+                    "-lws2_32.lib",
+                ]
+            },            
         }]
+
       ]
     },
     {
