@@ -6,14 +6,14 @@ Fast native implementation by wrapping libmaxminddb to read MaxMind's GeoIP2 mmd
 For ease of use, this module includes the GeoLite2 database created by MaxMind, available from http://www.maxmind.com.  To get more accurate results, this module can also be used with the GeoIP2 database sold by MaxMind.
 
 ## Installation
-`npm install --save node-geoip2`
+`npm install --save geoip2`
 
 Will compile libmaxminddb and node bindings on install.  Currently only tested on Linux (x64) and OS X (x64) running Nodejs 0.12.x or Nodejs 4.x.  To add support for more platforms, the config header files need to be generated on the platform from libmaxminddb.
 
 ## Usage
 Lookup an ip address:
 ```
-var geoip2 = require('node-geoip2');
+var geoip2 = require('geoip2');
 geoip2.init();
 geoip2.lookupSimple("67.183.57.64", function(error, result) {
   if (error) {
