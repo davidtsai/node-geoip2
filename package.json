@@ -1,6 +1,6 @@
 {
   "name": "geoip2",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Maxmind GeoIP2 database reader for geolocating ip addresses.  Fast native implementation by wrapping libmaxminddb.",
   "main": "./node-geoip2.js",
   "author": "David Tsai",
