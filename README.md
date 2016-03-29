@@ -1,4 +1,4 @@
-# node-geoip2
+# geoip2
 Maxmind GeoIP2 database API for geolocating ip addresses.
 
 Fast native implementation by wrapping libmaxminddb to read MaxMind's GeoIP2 mmdb databases.
