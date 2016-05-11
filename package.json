@@ -3,7 +3,9 @@
   "version": "1.0.3",
   "description": "Maxmind GeoIP2 database reader for geolocating ip addresses.  Fast native implementation by wrapping libmaxminddb.",
   "main": "./node-geoip2.js",
-  "author": "David Tsai",
+  "author": {
+    "name": "David Tsai"
+  },
   "license": "MIT",
   "keywords": [
     "maxmind",
@@ -21,5 +23,39 @@
   },
   "dependencies": {
     "nan": "2.2.0"
-  }
+  },
+  "scripts": {
+    "install": "node-gyp rebuild"
+  },
+  "gypfile": true,
+  "gitHead": "5c451c209722cc6087b9697dbb52160500ccf4ca",
+  "bugs": {
+    "url": "https://github.com/davidtsai/node-geoip2/issues"
+  },
+  "homepage": "https://github.com/davidtsai/node-geoip2#readme",
+  "_id": "geoip2@1.0.2",
+  "_shasum": "cd0bb5668a2b07eeb39fa4ef0339302064793087",
+  "_from": "geoip2@>=1.0.2 <2.0.0",
+  "_npmVersion": "3.7.2",
+  "_nodeVersion": "4.3.0",
+  "_npmUser": {
+    "name": "davidtsai",
+    "email": "anatari@gmail.com"
+  },
+  "dist": {
+    "shasum": "cd0bb5668a2b07eeb39fa4ef0339302064793087",
+    "tarball": "https://registry.npmjs.org/geoip2/-/geoip2-1.0.2.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "davidtsai",
+      "email": "anatari@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/geoip2-1.0.2.tgz_1459223097752_0.5760689412709326"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/geoip2/-/geoip2-1.0.2.tgz"
 }

@@ -1,0 +1,83 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/michael/.nvm/versions/node/v0.12.0/bin/node',
+1 verbose cli   '/Users/michael/.nvm/versions/node/v0.12.0/bin/npm',
+1 verbose cli   'install' ]
+2 info using npm@2.5.1
+3 info using node@v0.12.0
+4 verbose install where, deps [ '/Users/michael/workspace/node-geoip2', [ 'nan' ] ]
+5 verbose install where, peers [ '/Users/michael/workspace/node-geoip2', [] ]
+6 info preinstall geoip2@1.0.3
+7 verbose already installed skipping nan@2.2.0 /Users/michael/workspace/node-geoip2
+8 silly install resolved []
+9 info build /Users/michael/workspace/node-geoip2
+10 verbose linkStuff [ false, false, false, '/Users/michael/workspace' ]
+11 info linkStuff geoip2@1.0.3
+12 verbose linkBins geoip2@1.0.3
+13 verbose linkMans geoip2@1.0.3
+14 verbose rebuildBundles geoip2@1.0.3
+15 verbose rebuildBundles [ '.bin', 'nan', 'node-gyp' ]
+16 verbose rebuild bundle /Users/michael/workspace/node-geoip2/node_modules/node-gyp
+17 info build /Users/michael/workspace/node-geoip2/node_modules/node-gyp
+18 info preinstall node-gyp@3.3.1
+19 verbose linkStuff [ false,
+19 verbose linkStuff   false,
+19 verbose linkStuff   false,
+19 verbose linkStuff   '/Users/michael/workspace/node-geoip2/node_modules' ]
+20 info linkStuff node-gyp@3.3.1
+21 warn prefer global node-gyp@3.3.1 should be installed with -g
+22 verbose linkBins node-gyp@3.3.1
+23 verbose link bins [ { 'node-gyp': './bin/node-gyp.js' },
+23 verbose link bins   '/Users/michael/workspace/node-geoip2/node_modules/.bin',
+23 verbose link bins   false ]
+24 verbose linkMans node-gyp@3.3.1
+25 verbose rebuildBundles node-gyp@3.3.1
+26 verbose rebuildBundles [ '.bin',
+26 verbose rebuildBundles   'fstream',
+26 verbose rebuildBundles   'glob',
+26 verbose rebuildBundles   'graceful-fs',
+26 verbose rebuildBundles   'minimatch',
+26 verbose rebuildBundles   'mkdirp',
+26 verbose rebuildBundles   'nopt',
+26 verbose rebuildBundles   'npmlog',
+26 verbose rebuildBundles   'osenv',
+26 verbose rebuildBundles   'path-array',
+26 verbose rebuildBundles   'request',
+26 verbose rebuildBundles   'rimraf',
+26 verbose rebuildBundles   'semver',
+26 verbose rebuildBundles   'tar',
+26 verbose rebuildBundles   'which' ]
+27 verbose gentlyRm vacuuming /Users/michael/workspace/node-geoip2/node_modules/.bin/node-gyp
+28 silly gentlyRm purging /Users/michael/workspace/node-geoip2/node_modules/.bin/node-gyp
+29 silly gentlyRm removing /Users/michael/workspace/node-geoip2/node_modules/.bin
+30 silly gentlyRm quitting because other entries in /Users/michael/workspace/node-geoip2/node_modules
+31 info install node-gyp@3.3.1
+32 info postinstall node-gyp@3.3.1
+33 info install geoip2@1.0.3
+34 verbose unsafe-perm in lifecycle true
+35 info geoip2@1.0.3 Failed to exec install script
+36 verbose stack Error: geoip2@1.0.3 install: `node-gyp rebuild`
+36 verbose stack Exit status 1
+36 verbose stack     at EventEmitter.<anonymous> (/Users/michael/.nvm/versions/node/v0.12.0/lib/node_modules/npm/lib/utils/lifecycle.js:213:16)
+36 verbose stack     at EventEmitter.emit (events.js:110:17)
+36 verbose stack     at ChildProcess.<anonymous> (/Users/michael/.nvm/versions/node/v0.12.0/lib/node_modules/npm/lib/utils/spawn.js:14:12)
+36 verbose stack     at ChildProcess.emit (events.js:110:17)
+36 verbose stack     at maybeClose (child_process.js:1008:16)
+36 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:1080:5)
+37 verbose pkgid geoip2@1.0.3
+38 verbose cwd /Users/michael/workspace/node-geoip2
+39 error Darwin 15.4.0
+40 error argv "/Users/michael/.nvm/versions/node/v0.12.0/bin/node" "/Users/michael/.nvm/versions/node/v0.12.0/bin/npm" "install"
+41 error node v0.12.0
+42 error npm  v2.5.1
+43 error code ELIFECYCLE
+44 error geoip2@1.0.3 install: `node-gyp rebuild`
+44 error Exit status 1
+45 error Failed at the geoip2@1.0.3 install script 'node-gyp rebuild'.
+45 error This is most likely a problem with the geoip2 package,
+45 error not with npm itself.
+45 error Tell the author that this fails on your system:
+45 error     node-gyp rebuild
+45 error You can get their info via:
+45 error     npm owner ls geoip2
+45 error There is likely additional logging output above.
+46 verbose exit [ 1, true ]
