@@ -15,11 +15,18 @@
     "geolocation",
     "ip"
   ],
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/davidtsai/node-geoip2.git"
   },
   "dependencies": {
     "nan": "2.3.3"
+  },
+  "devDependencies": {
+    "mocha": "^2.5.1",
+    "chai": "^3.5.0"
   }
 }
