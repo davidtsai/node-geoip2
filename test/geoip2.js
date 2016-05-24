@@ -17,6 +17,16 @@ describe('geoip2', function() {
         expect(result.location.latitude).to.be.a('number');
         expect(result.location.longitude).to.be.a('number');
       });
+      it('throws an exception when an invalid ip address is entered', function() {
+        try {
+          var result = geoip2.lookupSimpleSync('asdf');
+        }
+        catch(error) {
+          expect(error).to.exist;
+          return;
+        }
+        expect.fail('Expected lookupSimpleSync to throw');
+      });
     });
 
     describe('#lookupSimple', function() {
