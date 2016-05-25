@@ -13,7 +13,7 @@ describe('geoip2', function() {
 	expect(result.subdivision).to.equal('WA');
 	expect(result.country).to.equal('US');
         expect(result.continent).to.equal('NA');
-        expect(result.postal).to.equal('98275');
+        expect(result.postal).to.equal('98258');
         expect(result.location.latitude).to.be.a('number');
         expect(result.location.longitude).to.be.a('number');
       });
@@ -35,7 +35,7 @@ describe('geoip2', function() {
 	  expect(result.subdivision).to.equal('WA');
       	  expect(result.country).to.equal('US');
           expect(result.continent).to.equal('NA');
-          expect(result.postal).to.equal('98275');
+          expect(result.postal).to.equal('98258');
           expect(result.location.latitude).to.be.a('number');
           expect(result.location.longitude).to.be.a('number');
 	  done();
