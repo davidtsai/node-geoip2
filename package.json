@@ -24,6 +24,7 @@
   "dependencies": {
     "nan": "2.3.5"
   },
+  "os" : [ "darwin", "linux" ],
   "devDependencies": {
     "mocha": "^2.5.1",
     "chai": "^3.5.0"
