@@ -4,7 +4,7 @@
       "target_name": "node_mmdb",
       "include_dirs": [
         "<!(node -e \"require('nan')\")",
-        "deps/config/<(OS)/<(target_arch)",
+        "deps/config/win/x64",
         "deps/libmaxminddb",
         "deps/libmaxminddb/src",
         "deps/libmaxminddb/include"
