@@ -15,6 +15,7 @@
     "ip"
   ],
   "scripts": {
+    "postinstall": "sh ./download.sh",
     "test": "./node_modules/.bin/mocha"
   },
   "repository": {
