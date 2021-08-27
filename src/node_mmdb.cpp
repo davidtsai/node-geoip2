@@ -29,7 +29,7 @@ static Local<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list)
                             (*entry_data_list)->entry_data.data_size);
 
             *entry_data_list = (*entry_data_list)->next;
-            object->Set(Nan::New(key).ToLocalChecked(), convertToV8Helper(entry_data_list));
+            Nan::Set(object, Nan::New(key).ToLocalChecked(), convertToV8Helper(entry_data_list));
         }
         return object;
     }
@@ -43,7 +43,7 @@ static Local<Value> convertToV8Helper(MMDB_entry_data_list_s **entry_data_list)
         int i = 0;
         for (*entry_data_list = (*entry_data_list)->next; size && *entry_data_list; size--)
         {
-            array->Set(i++, convertToV8Helper(entry_data_list));
+            Nan::Set(array, i++, convertToV8Helper(entry_data_list));
         }
 
         return array;
@@ -319,7 +319,7 @@ static void init(Local<Object> exports)
     Isolate *isolate = exports->GetIsolate();
     Local<Context> context = isolate->GetCurrentContext();
 
-    exports->Set(Nan::New("MMDB").ToLocalChecked(), mmdbTpl->GetFunction(context).ToLocalChecked());
+    Nan::Set(exports, Nan::New("MMDB").ToLocalChecked(), mmdbTpl->GetFunction(context).ToLocalChecked());
 }
 
 NODE_MODULE(node_mmdb, init)
