@@ -10,7 +10,7 @@
         "deps/libmaxminddb/include"
       ],
       "cflags": [
-        "-std=c++11",
+        "-std=c++14",
         "-Wno-unused-function",
         "-Wno-reorder",
         "-O3"
@@ -23,8 +23,9 @@
       "conditions": [
         [ 'OS=="mac"', {
           "xcode_settings": {
+            'CLANG_CXX_LANGUAGE_STANDARD': 'c++14',
             'OTHER_CPLUSPLUSFLAGS': [
-              '-std=c++11',
+              '-std=c++14',
               '-stdlib=libc++',
               '-Wno-unused-function',
               '-Wno-reorder',
